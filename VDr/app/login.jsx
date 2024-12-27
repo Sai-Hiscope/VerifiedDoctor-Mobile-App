@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)', // Dark overlay with 10% opacity
+    backgroundColor: 'rgba(0, 0, 0, 0.)', // Dark overlay with 10% opacity
   },
   container: {
     flex: 0.5,
@@ -135,19 +135,19 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 50,
     borderBottomRightRadius: 50,
     position: 'absolute',
-    top: 0,
+    top:0,
     alignItems: 'center',
   },
   logo: {
-    width: 80,
-    height: 80,
+    width: 70,
+    height: 70,
     marginTop: 10,
     position: 'absolute',
-    top: 160,
-    right: 10,
+    top: 320,
+    right: 20,
   },
   avatarContainer: {
-    marginTop: height * 0.15,
+    marginTop: height * 0.35,
     width: 100,
     height: 100,
     backgroundColor: '#fff',
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 15,
     marginTop: 20,
-    fontSize: 16,
+    fontSize: 22,
     backgroundColor: '#fff',
   },
   forgotPassword: {
