@@ -13,7 +13,7 @@ import {
   Platform,
 } from 'react-native';
 
-const { height } = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const SignupScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
@@ -69,7 +69,7 @@ const SignupScreen = ({ navigation }) => {
               onChangeText={(value) => handleInputChange('firstName', value)}
             />
             <TextInput
-              style={styles.input}
+              style={[styles.input, { marginLeft: 10 }]}
               placeholder="Last Name"
               placeholderTextColor="#aaa"
               value={formData.lastName}
@@ -132,19 +132,19 @@ const SignupScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f8f8',
   },
   scrollContent: {
-    flexGrow: 0.1,
+    flexGrow: 1,
   },
   primaryBackground: {
-    height: height * 0.3,
+    height: height * 0.45,
     justifyContent: 'center',
     alignItems: 'center',
+    width: '100%',
   },
   backgroundImage: {
-    borderBottomLeftRadius: 40,
-    borderBottomRightRadius: 40,
+    borderBottomLeftRadius: 1,
+    borderBottomRightRadius: 1,
     overflow: 'hidden',
   },
   overlay: {
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     width: 90,
     height: 80,
     position: 'absolute',
-    top: 180,
+    top: 280,
     right: 10,
   },
   formContainer: {
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   input: {
-    flex: 1,
+    width: '100%',
     height: 50,
     borderColor: '#ddd',
     borderWidth: 1,
@@ -189,6 +189,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     fontSize: 16,
     backgroundColor: '#fff',
+    marginBottom: 10,
   },
   signUpButton: {
     height: 50,
