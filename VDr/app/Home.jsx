@@ -10,9 +10,7 @@ import {
   TextInput,
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 
-// Tab Navigator Setup
 const Tab = createBottomTabNavigator();
 
 // Slider Component
@@ -188,7 +186,7 @@ const SearchBar = () => {
 };
 
 // Doctor Screen
-const DoctorScreen = () => (
+export const DoctorScreen = () => (
   <ScrollView>
     <SearchBar />
     <Text style={styles.sectionTitle}>Doctor Section</Text>
@@ -196,14 +194,14 @@ const DoctorScreen = () => (
   </ScrollView>
 );
 
-// Patient Screen
-const PatientScreen = () => (
+export const PatientScreen = () => (
   <ScrollView>
     <SearchBar />
     <Text style={styles.sectionTitle}>Patient Section</Text>
     <Slider />
   </ScrollView>
 );
+
 
 // Home Screen
 const HomeScreen = ({ navigation }) => (
@@ -235,18 +233,17 @@ const HomeScreen = ({ navigation }) => (
   </ScrollView>
 );
 
-// App Component with NavigationContainer
-export default function App() {
+// Home Component with NavigationContainer
+export default function HomeComponent() {
   return (
-    // <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Doctor" component={DoctorScreen} />
-        <Tab.Screen name="Patient" component={PatientScreen} />
-      </Tab.Navigator>
-    // </NavigationContainer>
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Doctor" component={DoctorScreen} />
+      <Tab.Screen name="Patient" component={PatientScreen} />
+    </Tab.Navigator>
   );
 }
+
 
 // Styles
 const styles = StyleSheet.create({

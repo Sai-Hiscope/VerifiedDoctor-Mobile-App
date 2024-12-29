@@ -8,10 +8,12 @@ import {
   Dimensions,
   Image,
   ImageBackground,
-  KeyboardAvoidingView,
+  // KeyboardAvoidingView,
   ScrollView,
   Platform,
+  KeyboardAwareScrollView ,
 } from 'react-native';
+
 
 const { height, width } = Dimensions.get('window');
 
@@ -30,17 +32,33 @@ const SignupScreen = ({ navigation }) => {
   };
 
   const handleSignUp = () => {
-    if (formData.password !== formData.confirmPassword) {
+    const { password, confirmPassword, email, phoneNumber } = formData;
+  
+    if (password !== confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
-
+  
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address!');
+      return;
+    }
+  
+    if (phoneNumber.length !== 10) {
+      alert('Please enter a valid phone number!');
+      return;
+    }
+  
     console.log('Signup Data:', formData);
     alert('Signup Successful!');
+    navigation.navigate('Login'); // Automatically navigate to the login screen after successful signup
+
   };
+  
 
   return (
-    <KeyboardAvoidingView
+    <KeyboardAwareScrollView 
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
@@ -125,7 +143,7 @@ const SignupScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView >
   );
 };
 
