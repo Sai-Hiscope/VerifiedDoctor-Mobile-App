@@ -16,9 +16,14 @@ const SignInScreen = () => {
   const [password, setPassword] = useState('');
 
   const handleSignIn = () => {
+    if (!email || !password) {
+      alert("Please fill out both fields.");
+      return;
+    }
     console.log('Email:', email);
     console.log('Password:', password);
   };
+  
 
   return (
     <View style={styles.container}>
@@ -49,6 +54,8 @@ const SignInScreen = () => {
         placeholderTextColor="#aaa"
         value={email}
         onChangeText={setEmail}
+        keyboardType="email-address" // Appropriate keyboard for email
+        autoCapitalize="none" // Prevent capitalization of email input
       />
 
       <TextInput
@@ -59,7 +66,7 @@ const SignInScreen = () => {
         value={password}
         onChangeText={setPassword}
       />
-
+    
       <TouchableOpacity>
         <Text style={styles.forgotPassword}>Forget Password?</Text>
       </TouchableOpacity>
