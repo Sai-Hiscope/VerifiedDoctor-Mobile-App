@@ -1,13 +1,13 @@
 import React from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { Tabs } from 'expo-router'; // This will handle your tab navigation
-import { NavigationContainer } from '@react-navigation/native';
+// import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeScreen, DoctorScreen, PatientScreen } from './Home';
 import LoginScreen from './login';
 import SignupScreen from './signup';
-import ForgetPasswordScreen from './forgetpassword';
+// import ForgetPasswordScreen from './remaining/forgetpassword';
 import DoctorVerificationScreen from './doctorVerificationPage';
 
 const Stack = createStackNavigator();
@@ -50,6 +50,7 @@ const TabNavigator = () => {
 const App = () => {
   return (
       <Stack.Navigator initialRouteName="MainTabs">
+        
         <Stack.Screen 
           name="MainTabs" 
           component={TabNavigator} 
@@ -57,7 +58,7 @@ const App = () => {
         />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Signup" component={SignupScreen} />
-        <Stack.Screen name="ForgetPassword" component={ForgetPasswordScreen} />
+        {/* <Stack.Screen name="ForgetPassword" component={ForgetPasswordScreen} /> */}
         <Stack.Screen name="DoctorVerification" component={DoctorVerificationScreen} />
       </Stack.Navigator>
   );

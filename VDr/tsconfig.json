@@ -13,6 +13,6 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "app/_layout.jsx"
-  ],
+, "app/remaining/+not-found.tsx"  ],
   "extends": "expo/tsconfig.base"
 }
