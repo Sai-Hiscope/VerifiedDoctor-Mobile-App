@@ -1,37 +1,29 @@
 import React, { useState } from 'react';
 import {
+  StyleSheet,
   View,
   Text,
   TextInput,
-  StyleSheet,
   TouchableOpacity,
-  Dimensions,
   Image,
-  ImageBackground,
-  // KeyboardAvoidingView,
-  ScrollView,
-  Platform,
-  KeyboardAwareScrollView ,
+  Dimensions,
 } from 'react-native';
 
+const { width, height } = Dimensions.get('window');
 
-const { height, width } = Dimensions.get('window');
+const SignInScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-const SignupScreen = ({ navigation }) => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    password: '',
-    confirmPassword: '',
-  });
-
-  const handleInputChange = (key, value) => {
-    setFormData({ ...formData, [key]: value });
-  };
-
-  const handleSignUp = () => {
+  // const handleSignIn = () => {
+  //   if (!email || !password) {
+  //     alert("Please fill out both fields.");
+  //     return;
+  //   }
+  //   console.log('Email:', email);
+  //   console.log('Password:', password);
+  // };
+   const handleSignUp = () => {
     const { password, confirmPassword, email, phoneNumber } = formData;
   
     if (password !== confirmPassword) {
@@ -58,158 +50,161 @@ const SignupScreen = ({ navigation }) => {
   
 
   return (
-    <KeyboardAwareScrollView 
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
-        <ImageBackground
-          source={require('@/assets/images/background.png')} // Replace with your background image path
-          style={styles.primaryBackground}
-          imageStyle={styles.backgroundImage}
-        >
-          <View style={styles.overlay} />
+    <View style={styles.container}>
+      {/* Top Background */}
+      <View style={styles.topBackground}>
+        <Text style={styles.headerTitle}>VERIFIED DOCTOR</Text>
+        <Image
+          source={require('@/assets/images/icon.png')} // Replace with your logo path
+          style={styles.logo}
+        />
+      </View>
+
+      {/* Avatar */}
+      <View style={styles.avatarContainer}>
+        <Image
+          style={styles.avatar}
+          source={require('@/assets/images/profile.png')} // Replace with an avatar placeholder path
+        />
+      </View>
+
+      {/* Sign In Text */}
+      <Text style={styles.title}>Sign In</Text>
+
+      {/* Input Fields */}
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        placeholderTextColor="#aaa"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address" // Appropriate keyboard for email
+        autoCapitalize="none" // Prevent capitalization of email input
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        placeholderTextColor="#aaa"
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
+      />
+    
+      <TouchableOpacity>
+        <Text style={styles.forgotPassword}>Forget Password?</Text>
+      </TouchableOpacity>
+
+      {/* Sign Up Button */}
+      <TouchableOpacity style={styles.signInButton} onPress={handleSignUp}>
+        <Text style={styles.signInButtonText}>Sign up</Text>
+      </TouchableOpacity>
+
+      {/* Or Section */}
+      <View style={styles.orContainer}>
+        <View style={styles.line} />
+        <Text style={styles.orText}>or</Text>
+        <View style={styles.line} />
+      </View>
+
+      {/* Social Icons */}
+      <View style={styles.socialContainer}>
+        <TouchableOpacity>
           <Image
-            source={require('@/assets/images/icon.png')} // Replace with your logo image path
-            style={styles.logo}
+            source={require('@/assets/images/icon1.png')} // Replace with Google icon path
+            style={styles.socialIcon}
           />
-        </ImageBackground>
-
-        <View style={styles.formContainer}>
-          <Text style={styles.title}>Sign Up</Text>
-
-          <View style={styles.row}>
-            <TextInput
-              style={[styles.input, { marginRight: 10 }]}
-              placeholder="First Name"
-              placeholderTextColor="#aaa"
-              value={formData.firstName}
-              onChangeText={(value) => handleInputChange('firstName', value)}
-            />
-            <TextInput
-              style={[styles.input, { marginLeft: 10 }]}
-              placeholder="Last Name"
-              placeholderTextColor="#aaa"
-              value={formData.lastName}
-              onChangeText={(value) => handleInputChange('lastName', value)}
-            />
-          </View>
-
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#aaa"
-            keyboardType="email-address"
-            value={formData.email}
-            onChangeText={(value) => handleInputChange('email', value)}
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image
+            source={require('@/assets/images/icon2.png')} // Replace with Facebook icon path
+            style={styles.socialIcon}
           />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Phone Number"
-            placeholderTextColor="#aaa"
-            keyboardType="phone-pad"
-            value={formData.phoneNumber}
-            onChangeText={(value) => handleInputChange('phoneNumber', value)}
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Image
+            source={require('@/assets/images/icon3.png')} // Replace with LinkedIn icon path
+            style={styles.socialIcon}
           />
+        </TouchableOpacity>
+      </View>
 
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor="#aaa"
-            secureTextEntry
-            value={formData.password}
-            onChangeText={(value) => handleInputChange('password', value)}
-          />
-
-          <TextInput
-            style={styles.input}
-            placeholder="Confirm Password"
-            placeholderTextColor="#aaa"
-            secureTextEntry
-            value={formData.confirmPassword}
-            onChangeText={(value) => handleInputChange('confirmPassword', value)}
-          />
-
-          <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
-            <Text style={styles.signUpButtonText}>Sign Up</Text>
-          </TouchableOpacity>
-
-          <View style={styles.footerContainer}>
-            <Text style={styles.footerText}>Already have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-              <Text style={styles.loginText}> Login</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
-    </KeyboardAwareScrollView >
+      {/* Footer */}
+      <Text>
+<Text style={styles.footerText}>Don’t Have an Account?</Text>
+<Text style={styles.signUpText}> Sign Up </Text>
+</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  scrollContent: {
-    flexGrow: 1,
-  },
-  primaryBackground: {
-    height: height * 0.45,
-    justifyContent: 'center',
+    backgroundColor: '#fff',
     alignItems: 'center',
+  },
+  topBackground: {
     width: '100%',
+    height: height * 0.26,
+    backgroundColor: '#3B82F6',
+    borderBottomLeftRadius: 500,
+    borderBottomRightRadius: 0,
+    position: 'absolute',
+    top: 0,
+    alignItems: 'center',
   },
-  backgroundImage: {
-    borderBottomLeftRadius: 1,
-    borderBottomRightRadius: 1,
-    overflow: 'hidden',
-  },
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0)', // Dark overlay for better contrast
+  headerTitle: {
+    marginTop: 40,
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   logo: {
-    width: 90,
-    height: 80,
-    position: 'absolute',
-    top: 280,
-    right: 10,
+    width: 50,
+    height: 50,
+    marginTop: 10,
+    position:"absolute",
+    right:10,top:200
   },
-  formContainer: {
-    flex: 1,
-    paddingHorizontal: 20,
-    marginTop: -10,
+  avatarContainer: {
+    marginTop: height * 0.15,
+    width: 90,
+    height: 90,
     backgroundColor: '#fff',
-    borderTopLeftRadius: 1,
-    borderTopRightRadius: 1,
-    paddingTop: 20,
-    paddingBottom: 40,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    elevation: 5,
+  },
+  avatar: {
+    width: '100%',
+    height: '100%',
   },
   title: {
+    marginTop: 20,
     fontSize: 24,
     fontWeight: 'bold',
     color: '#333',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 15,
   },
   input: {
-    width: '100%',
+    width: '85%',
     height: 50,
     borderColor: '#ddd',
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 15,
+    marginTop: 20,
     fontSize: 16,
-    backgroundColor: '#fff',
-    marginBottom: 10,
   },
-  signUpButton: {
+  forgotPassword: {
+    marginTop: 10,
+    color: '#888',
+    textDecorationLine: 'underline',
+  },
+  signInButton: {
+    width: '85%',
     height: 50,
     backgroundColor: '#3B82F6',
     justifyContent: 'center',
@@ -217,24 +212,43 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 20,
   },
-  signUpButtonText: {
+  signInButtonText: {
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
   },
-  footerContainer: {
-    marginTop: 20,
+  orContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    width: '85%',
   },
-  footerText: {
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#ddd',
+  },
+  orText: {
+    marginHorizontal: 10,
     color: '#888',
   },
-  loginText: {
+  socialContainer: {
+    flexDirection: 'row',
+    marginTop: 20,
+  },
+  socialIcon: {
+    width: 50,
+    height: 50,
+    marginHorizontal: 10,
+  },
+  footerText: {
+    marginTop: 20,
+    color: '#888',
+  },
+  signUpText: {
     color: '#3B82F6',
     fontWeight: 'bold',
-    marginLeft: 5,
   },
 });
 
-export default SignupScreen;
+export default SignInScreen;

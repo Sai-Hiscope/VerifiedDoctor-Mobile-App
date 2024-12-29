@@ -15,13 +15,37 @@ const SignInScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSignIn = () => {
-    if (!email || !password) {
-      alert("Please fill out both fields.");
+  // const handleSignIn = () => {
+  //   if (!email || !password) {
+  //     alert("Please fill out both fields.");
+  //     return;
+  //   }
+  //   console.log('Email:', email);
+  //   console.log('Password:', password);
+  // };
+   const handleSignUp = () => {
+    const { password, confirmPassword, email, phoneNumber } = formData;
+  
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
       return;
     }
-    console.log('Email:', email);
-    console.log('Password:', password);
+  
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address!');
+      return;
+    }
+  
+    if (phoneNumber.length !== 10) {
+      alert('Please enter a valid phone number!');
+      return;
+    }
+  
+    console.log('Signup Data:', formData);
+    alert('Signup Successful!');
+    navigation.navigate('Login'); // Automatically navigate to the login screen after successful signup
+
   };
   
 
@@ -72,7 +96,7 @@ const SignInScreen = () => {
       </TouchableOpacity>
 
       {/* Sign Up Button */}
-      <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
+      <TouchableOpacity style={styles.signInButton} onPress={handleSignUp}>
         <Text style={styles.signInButtonText}>Sign up</Text>
       </TouchableOpacity>
 
