@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "aa5e0e22-123a-42a6-a6b1-b6b948cbee46"
+      }
+    },
+    "android": {
+      "package": "com.Hiscope"
+    },
+    "ios": {
+      "bundleIdentifier": "com.Hiscope"
+    }
+  }
+}
