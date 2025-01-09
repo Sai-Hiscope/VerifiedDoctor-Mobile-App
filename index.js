@@ -1,0 +1,6 @@
+// ...existing code...
+
+// Import polyfills
+import './polyfills';
+
+// ...existing code...

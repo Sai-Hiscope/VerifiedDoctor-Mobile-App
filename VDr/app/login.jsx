@@ -12,14 +12,19 @@ import {
 
 const { width, height } = Dimensions.get('window');
 
-const SignInScreen = () => {
+const LoginInScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignIn = () => {
+    if (!email || !password) {
+      Alert.alert("Error", "Please fill in all fields");
+      return;
+    }
     console.log('Email:', email);
     console.log('Password:', password);
   };
+  
 
   return (
     <ImageBackground
@@ -236,4 +241,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignInScreen;
+export default LoginInScreen;
